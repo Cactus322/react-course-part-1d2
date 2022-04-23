@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import RandomButton from "./components/RandomButton";
 import VoteButton from "./components/VoteButton";
+import MostVotedAnecdote from "./components/MostVotedAnecdote";
 
 const App = () => {
     const anecdotes = [
@@ -17,13 +18,25 @@ const App = () => {
 
     const [selected, setSelected] = useState(0);
     const [votes, setVotes] = useState(votesArray);
+    const [mostVoted, setMostVoted] = useState(0);
 
     return (
         <div>
-            <p>{anecdotes[selected]}</p>
-            <p>has {votes[selected]} votes</p>
-            <VoteButton currentAnecdote={selected} votes={votes} setVotes={setVotes}> </VoteButton>
-            <RandomButton anecdotes={anecdotes} setValue={setSelected}> </RandomButton>
+            <div>
+                <h1>Anecdote of the day</h1>
+                <p>{anecdotes[selected]}</p>
+                <p>has {votes[selected]} votes</p>
+                <VoteButton
+                    currentAnecdote={selected}
+                    votes={votes}
+                    setVotes={setVotes}
+                    setMostVoted={setMostVoted}
+                >
+                </VoteButton>
+                <RandomButton anecdotes={anecdotes} setValue={setSelected}> </RandomButton>
+            </div>
+
+            <MostVotedAnecdote anecdotes={anecdotes} mostVoted={mostVoted}> </MostVotedAnecdote>
         </div>
     )
 }
